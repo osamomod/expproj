@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block title %}Контакты - Massage{% endblock %}
+{%block content%}
+
+<h2>Контактная информация</h2>
+<div class="contact-details">
+  <h3>{{ profile.name }}</h3>
+  <p><strong>Телефон:</strong> {{ profile.phone }}</p>
+  <p>
+    <strong>Email:</strong>
+    <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+  </p>
+  <p><strong>Адрес:</strong> {{ profile.address }}</p>
+  <p>{{ profile.about }}</p>
+  <img src="{{ profile.photo.url }}" alt="Фото профиля" class="profile-photo" />
+</div>
+
+{% endblock %}

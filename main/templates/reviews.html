@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block title %}Отзывы - Massage{% endblock %}
+{%block content%}
+
+<h2>Отзывы клиентов</h2>
+
+<ul class="review-list">
+  {% for review in reviews %}
+  <li class="review-item">
+    <div class="review-content">
+      <div class="review-text">
+        <strong>{{ review.author}}</strong>
+        ({{review.rating}}/5):{{review.comment}}
+        <em>{{review.created_at|date:"d M Y H:i"}}</em>
+      </div>
+
+      {% if review.image %}
+      <div class="review-image-container">
+        <img
+          src="{{ review.image.url }}"
+          alt="Image from {{review.author}}"
+          class="review-image"
+        />
+      </div>
+      {% else %}
+      <p>No image available</p>
+      {% endif %}
+
+      <a href="{% url 'review_page' review.id %}" class="read-more-link"
+        >Читать полностью</a
+      >
+    </div>
+  </li>
+  {% empty %}
+  <li>Пока нет отзывов.</li>
+  {% endfor %}
+</ul>
+{%endblock%}

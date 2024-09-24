@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}" />
+    <title>{% block title %}Massage{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="header-left">
+          <h1 class="site-title">
+            <a href="{% url 'homepage' %}">Массаж</a>
+          </h1>
+        </div>
+        <nav class="header-right">
+          <ul>
+            <li><a href="{% url 'services' %}">Услуги</a></li>
+            <li><a href="{% url 'booking' %}">Онлайн-бронирование</a></li>
+            <li><a href="{% url 'reviews' %}">Отзывы</a></li>
+            <li><a href="{% url 'contacts' %}">Контакты</a></li>
+          </ul>
+        </nav>
+        <div class="header-controls">
+          {% if user.is_authenticated %}
+          <span>Привет, {{ user.get_username }}</span>
+          {% if perms.main.add_review %}
+          <a href="{% url 'submit_review' %}" class="btn">Оставить отзыв</a>
+          {% endif %}
+          <form
+            action="{% url 'logout' %}?next={% url 'contacts' %}"
+            method="post"
+            class="header-form"
+          >
+            {% csrf_token %}
+            <button type="submit" class="btn">Выйти</button>
+          </form>
+          {% else %}
+          <form
+            action="{% url 'login' %}?next={{request.path}}"
+            method="post"
+            class="header-form"
+          >
+            {% csrf_token %}
+            <button type="submit" class="btn">Войти</button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
+      {% block content %}
+      <!-- Основной контент страницы -->
+      {% endblock %}
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <p>&copy; 2024 by Osamo</p>
+      </div>
+    </footer>
+  </body>
+</html>

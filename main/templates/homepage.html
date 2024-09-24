@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Главная -
+Massage{%endblock %} {%block content %}
+<h1>Добро пожаловать на сайт массажиста!</h1>
+<div class="main-banner">
+  <img src="{% static 'main/img/главная.jpg' %}" alt="Главное изображение" class="homepage-photo" />
+</div>
+<div class="intro-text">
+  <p>
+    Предлагаем услуги профессионального массажа для расслабления и оздоровления.
+  </p>
+</div>
+{% endblock %}

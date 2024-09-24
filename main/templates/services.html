@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %}Услуги - Massage{% endblock %} {%block content%}
+<h2>Наши услуги</h2>
+
+<ul class="service-list">
+  {% for service in services %}
+  <li class="service-item">
+    <h3>{{ service.name }}</h3>
+    <p><strong>Цена:</strong> {{ service.price }} руб.</p>
+    <p><strong>Продолжительность:</strong> {{ service.duration }}</p>
+    <p><strong>Описание:</strong> {{ service.description }}</p>
+    <!-- Описание услуги -->
+  </li>
+  {% endfor %}
+</ul>
+
+{%endblock%}

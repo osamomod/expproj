@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block title %}Отзыв - {{ review.author.name
+}}{%endblock %} {%block content%}
+<h2>Отзыв от {{review.author.username}}</h2>
+<p>Рейтинг: {{review.rating}}/5</p>
+<p>{{ review.comment}}</p>
+{% if review.image%}
+<img
+  src="{{ review.image.url }}"
+  alt="Изображение отзыва"
+  class="review-image"
+/>
+{% endif %}
+<p><em>{{ review.created_at|date:"d M Y H:i" }}</em></p>
+<a href="{% url 'reviews' %}">Назад к отзывам</a>
+{% endblock %}
